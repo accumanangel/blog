@@ -1,5 +1,6 @@
 import PostCard from "@/components/PostCard";
 import { getCollection } from "@/lib/db";
+import { formatDistanceToNow } from "date-fns";
 import { ObjectId } from "mongodb";
 
 export default async function post({ params }) {
@@ -14,8 +15,16 @@ export default async function post({ params }) {
       : null;
 
   return (
-    <div className="container w-full md:w-3/4">
-      {post ? <PostCard post={post} /> : <p>Failed to fetch data</p>}
+    <div key={post._id} className="bg-white">
+      <div className="border-1 border-slate-200 p-4 rounded-md h-full">
+        <p className="block  font-semibold">{post.title}</p>
+        <p className="text-slate-400 text-xs mb-2">
+          {formatDistanceToNow(post._id.getTimestamp(), {
+            addSuffix: true,
+          })}
+        </p>
+        <p className="text-sm">{post.content}</p>
+      </div>
     </div>
   );
 }

@@ -16,7 +16,11 @@ export default function PostCard({ post }) {
             addSuffix: true,
           })}
         </p>
-        <p className="text-sm ">{post.content}</p>
+        <p className="text-sm">
+          {post.content.length > 100
+            ? post.content.slice(0, 100) + "..."
+            : post.content}
+        </p>
       </div>
     </div>
   );
