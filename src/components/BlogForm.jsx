@@ -1,4 +1,5 @@
 "use client";
+import { Sparkles, Loader } from "lucide-react";
 import { useActionState } from "react";
 
 export default function BlogForm({ handler, post }) {
@@ -32,7 +33,17 @@ export default function BlogForm({ handler, post }) {
       </div>
 
       <div>
-        <button type="submit" className="btn-primary">
+        <button
+          type="submit"
+          className="btn-primary flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-all duration-300 group"
+        >
+          <span className="mr-2 transition-transform duration-300">
+            {isPending ? (
+              <Loader className="w-4 h-4 animate-spin" />
+            ) : (
+              <Sparkles className="w-4 h-4" />
+            )}
+          </span>
           {isPending ? "Loading..." : "Submit"}
         </button>
       </div>

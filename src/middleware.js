@@ -9,12 +9,16 @@ export default async function middleware(req) {
   const isProtected = protectedRoutes.some((route) => path.startsWith(route));
   const isPublic = publicRoutes.some((route) => path.startsWith(route));
 
-  //   console.log("Middleware *****");
-
   const user = await getAuthUser();
   const userId = user?.userId;
 
-  console.log(userId);
+  // If path matches posts/show/[id], make it public
+  const isPostShowPage = path.startsWith("/posts/show/");
+
+  // Skip the login redirect for posts/show/[id]
+  if (isPostShowPage) {
+    return NextResponse.next();
+  }
 
   // if user is not logged in
   if (isProtected && !userId) {

@@ -14,7 +14,7 @@ export default async function post({ params }) {
       : null;
 
   return (
-    <div className="container w-1/2">
+    <div className="container w-full md:w-3/4">
       {post ? <PostCard post={post} /> : <p>Failed to fetch data</p>}
     </div>
   );
